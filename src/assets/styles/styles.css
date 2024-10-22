@@ -1,0 +1,13 @@
+#board-1,
+#board-2 {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+}
+
+.cell-1,
+.cell-2 {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+}
