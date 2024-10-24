@@ -1,7 +1,8 @@
 import GameBoard from "./gameBoard";
 
 export default class Player {
-  constructor() {
+  constructor(playerType) {
+    this.playerType = playerType;
     this.board = new GameBoard();
   }
 }
