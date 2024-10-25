@@ -4,7 +4,7 @@ export default class GameBoard {
   static shipLengths = [5, 4, 3, 3, 2];
 
   constructor() {
-    this.board = this.generateBoard();
+    this.board = [];
     this.ships = [
       new Ship(5, "5"),
       new Ship(4, "4"),
@@ -15,19 +15,25 @@ export default class GameBoard {
   }
 
   generateBoard() {
-    const board = [];
-
     for (let i = 0; i < 10; i++) {
-      board[i] = [];
+      this.board[i] = [];
 
       for (let j = 0; j < 10; j++) {
-        board[i].push(null);
+        this.board[i].push({
+          empty: true,
+          shipType: null,
+          hit: false,
+          miss: false,
+        });
       }
     }
-    return board;
+    return this.board;
   }
 
-  shuffleShips(ship) {
+  shuffleShips() {
+    this.board = [];
+    this.generateBoard();
+
     this.ships.forEach((ship) => {
       let shipDirection = Math.random() < 0.5 ? "vertical" : "horizontal";
 
@@ -42,7 +48,7 @@ export default class GameBoard {
             canPlace = true;
 
             for (let i = 0; i < ship.length; i++) {
-              if (this.board[startY][startX + i] !== null) {
+              if (!this.board[startY][startX + i].empty) {
                 canPlace = false;
 
                 break;
@@ -56,7 +62,7 @@ export default class GameBoard {
             canPlace = true;
 
             for (let i = 0; i < ship.length; i++) {
-              if (this.board[startY + i][startX] !== null) {
+              if (!this.board[startY + i][startX].empty) {
                 canPlace = false;
 
                 break;
@@ -75,11 +81,11 @@ export default class GameBoard {
       if (canPlace) {
         if (shipDirection === "horizontal") {
           for (let i = 0; i < ship.length; i++) {
-            this.board[startY][startX + i] = ship.type;
+            this.board[startY][startX + i].shipType = ship.type;
           }
         } else if (shipDirection === "vertical") {
           for (let i = 0; i < ship.length; i++) {
-            this.board[startY + i][startX] = ship.type;
+            this.board[startY + i][startX].shipType = ship.type;
           }
         }
       }

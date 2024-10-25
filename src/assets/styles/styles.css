@@ -3,16 +3,19 @@
   justify-content: space-evenly;
 }
 
-#board-1,
-#board-2 {
+#board-player,
+#board-computer {
   display: grid;
   grid-template-columns: repeat(10, 40px);
   grid-template-rows: repeat(10, 40px);
 }
 
-.cell-1,
-.cell-2 {
+.cell {
   width: 40px;
   height: 40px;
   border: 1px solid black;
+}
+
+.ship {
+  background-color: blue;
 }
