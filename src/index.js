@@ -1,21 +1,24 @@
 import dom from "./modules/dom";
 import GameBoard from "./modules/gameBoard";
 import "./assets/styles/styles.css";
+import GameController from "./modules/gameController";
 
 const screen = dom();
-const board1 = new GameBoard();
-const btn = document.querySelector("#test-btn");
+const playerBoard = document.querySelector("#board-player");
+const randBtn = document.querySelector("#random");
+const startBtn = document.querySelector("#start");
 
-board1.generateBoard();
+const game = new GameController();
 
-btn.addEventListener("click", () => {
-  board1.shuffleShips();
-  screen.displayBoard("player", board1);
-  console.log(board1.board);
-  console.log("test");
+randBtn.addEventListener("click", () => {
+  game.player.playerBoard.shuffleShips();
+  screen.displayBoard(playerBoard, "player", game.player.playerBoard);
 });
 
-screen.displayBoard("player", board1);
-// screen.displayBoard("computer");
+document.addEventListener("DOMContentLoaded", () => {
+  game.player.playerBoard.generateBoard();
+  console.log(game.player.playerBoard.board);
+  screen.displayBoard(playerBoard, game.player, game.player.playerBoard);
+});
 
 console.log("hello");

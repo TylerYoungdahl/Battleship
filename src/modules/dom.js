@@ -1,10 +1,6 @@
-import Player from "./player";
-
 export default function dom() {
-  function displayBoard(player, gameBoard) {
-    const board = document.querySelector(`#board-${player}`);
-
-    board.innerHTML = "";
+  function displayBoard(domBoard, player, gameBoard) {
+    domBoard.innerHTML = "";
 
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
@@ -18,11 +14,11 @@ export default function dom() {
         } else if (gameBoard.board[x][y].miss) {
           cell.classList.add("miss");
         }
-        cell.dataset.type = player;
+        cell.dataset.type = player.type;
         cell.dataset.x = x;
         cell.dataset.y = y;
 
-        board.appendChild(cell);
+        domBoard.appendChild(cell);
       }
     }
   }

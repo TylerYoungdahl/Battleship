@@ -5,4 +5,8 @@ export default class GameController {
     this.player = new Player("player");
     this.computer = new Player("computer");
   }
+
+  startGame() {
+    this.computer.board.shuffleShips();
+  }
 }
