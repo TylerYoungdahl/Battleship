@@ -30,6 +30,15 @@ export default class GameBoard {
     return this.board;
   }
 
+  receiveAttack(x, y) {
+    if (this.board[x][y].empty) {
+      this.board[x][y].empty = false;
+      this.board[x][y].miss = true;
+    } else if (this.board[x][y].shipType !== null) {
+      this.board[x][y].hit = true;
+    }
+  }
+
   shuffleShips() {
     this.board = [];
     this.generateBoard();

@@ -3,11 +3,12 @@ import GameBoard from "./modules/gameBoard";
 import "./assets/styles/styles.css";
 import GameController from "./modules/gameController";
 
-const screen = dom();
 const playerBoard = document.querySelector("#board-player");
+const compBoard = document.querySelector("#board-computer");
 const randBtn = document.querySelector("#random");
 const startBtn = document.querySelector("#start");
 
+const screen = dom();
 const game = new GameController();
 
 randBtn.addEventListener("click", () => {
@@ -17,8 +18,7 @@ randBtn.addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   game.player.playerBoard.generateBoard();
-  console.log(game.player.playerBoard.board);
+  game.computer.playerBoard.generateBoard();
   screen.displayBoard(playerBoard, game.player, game.player.playerBoard);
+  screen.displayBoard(compBoard, game.computer, game.computer.playerBoard);
 });
-
-console.log("hello");
