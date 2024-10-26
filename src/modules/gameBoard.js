@@ -36,7 +36,21 @@ export default class GameBoard {
       this.board[x][y].miss = true;
     } else if (this.board[x][y].shipType !== null) {
       this.board[x][y].hit = true;
+
+      this.ships.forEach((ship) => {
+        if (ship.type === this.board[x][y].shipType) {
+          ship.hit();
+        }
+      });
     }
+  }
+
+  checkAllShipsSunk() {
+    this.ships.forEach((ship) => {
+      if (!ship.sunk) {
+        return false;
+      } else return true;
+    });
   }
 
   shuffleShips() {

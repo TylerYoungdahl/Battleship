@@ -14,7 +14,7 @@ export default function dom() {
         } else if (gameBoard.board[x][y].miss) {
           cell.classList.add("miss");
         }
-        cell.dataset.type = player.type;
+        cell.dataset.type = player.playerType;
         cell.dataset.x = x;
         cell.dataset.y = y;
 
@@ -23,5 +23,10 @@ export default function dom() {
     }
   }
 
-  return { displayBoard };
+  function startGameDOM(compBoard, randBtn) {
+    compBoard.style.pointerEvents = "auto";
+    randBtn.style.pointerEvents = "none";
+  }
+
+  return { displayBoard, startGameDOM };
 }
