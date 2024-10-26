@@ -6,6 +6,15 @@ export default class GameController {
     this.computer = new Player("computer");
     this.player.playerBoard.generateBoard();
     this.computer.playerBoard.generateBoard();
+    this.winner = null;
+  }
+
+  playerTurn(x, y) {
+    this.computer.playerBoard.receiveAttack(x, y);
+
+    this.checkWinner(this.player, this.computer);
+
+    this.compTurn();
   }
 
   compTurn() {
@@ -13,17 +22,20 @@ export default class GameController {
     const y = Math.floor(Math.random() * 10);
     const coordinate = this.player.playerBoard.board[x][y];
 
-    if (!coordinate.hit && !coordinate.miss) {
+    if (this.winner) {
+      return;
+    } else if (!coordinate.hit && !coordinate.miss) {
       this.player.playerBoard.receiveAttack(x, y);
+
+      this.checkWinner(this.computer, this.player);
+    } else {
+      this.compTurn();
     }
-    //  else {
-    //   this.compTurn();
-    // }
   }
 
-  checkWinner(player) {
-    if (player.playerBoard.checkAllShipsSunk()) {
-      console.log(`${player.playerType} wins`);
+  checkWinner(player, opponent) {
+    if (opponent.playerBoard.checkAllShipsSunk()) {
+      this.winner = player.playerType;
     }
   }
 }
