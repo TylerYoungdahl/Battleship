@@ -4,9 +4,10 @@ export default class GameController {
   constructor() {
     this.player = new Player("player");
     this.computer = new Player("computer");
+    this.winner = null;
+
     this.player.playerBoard.generateBoard();
     this.computer.playerBoard.generateBoard();
-    this.winner = null;
   }
 
   playerTurn(x, y) {

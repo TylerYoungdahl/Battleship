@@ -8,17 +8,41 @@ const compBoard = document.querySelector("#board-computer");
 const randBtn = document.querySelector("#random");
 const startBtn = document.querySelector("#start");
 
+const testPlayer = document.querySelector("#test-player");
+const testComp = document.querySelector("#test-comp");
+
 const screen = dom();
 const game = new GameController();
 
+function refreshBoards() {
+  screen.displayBoard(playerBoard, game.player, game.player.playerBoard, game);
+  screen.displayBoard(
+    compBoard,
+    game.computer,
+    game.computer.playerBoard,
+    game
+  );
+}
+
 randBtn.addEventListener("click", () => {
   game.player.playerBoard.shuffleShips();
-  screen.displayBoard(playerBoard, "player", game.player.playerBoard);
+  game.computer.playerBoard.shuffleShips();
+  screen.displayBoard(playerBoard, game.player, game.player.playerBoard, game);
+});
+
+startBtn.addEventListener("click", () => {
+  screen.startGameDOM(compBoard, randBtn);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   game.player.playerBoard.generateBoard();
   game.computer.playerBoard.generateBoard();
-  screen.displayBoard(playerBoard, game.player, game.player.playerBoard);
-  screen.displayBoard(compBoard, game.computer, game.computer.playerBoard);
+  refreshBoards();
+});
+
+testPlayer.addEventListener("click", () => {
+  console.log(game.player.playerBoard.board);
+});
+testComp.addEventListener("click", () => {
+  console.log(JSON.stringify(game.computer.playerBoard.board));
 });

@@ -13,3 +13,11 @@ test("Player receives attack from computer", () => {
 
   expect(checkAttack()).toBe(true);
 });
+
+test("Player's gameboard receives attack in new game", () => {
+  const game = new GameController();
+
+  game.computer.playerBoard.receiveAttack(0, 0);
+
+  expect(game.computer.playerBoard.board[0][0].miss).toBe(true);
+});

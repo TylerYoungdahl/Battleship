@@ -31,17 +31,18 @@ export default class GameBoard {
   }
 
   receiveAttack(x, y) {
-    if (this.board[x][y].empty) {
-      this.board[x][y].empty = false;
-      this.board[x][y].miss = true;
-    } else if (this.board[x][y].shipType !== null) {
+    if (this.board[x][y].shipType) {
       this.board[x][y].hit = true;
+      this.board[x][y].empty = false;
 
       this.ships.forEach((ship) => {
         if (ship.type === this.board[x][y].shipType) {
           ship.hit();
         }
       });
+    } else if (this.board[x][y].empty) {
+      this.board[x][y].empty = false;
+      this.board[x][y].miss = true;
     }
   }
 
