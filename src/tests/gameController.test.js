@@ -21,3 +21,16 @@ test("Player's gameboard receives attack in new game", () => {
 
   expect(game.computer.playerBoard.board[0][0].miss).toBe(true);
 });
+
+test("Computer attacks after player", () => {
+  const game = new GameController();
+
+  game.playerTurn(0, 0);
+  const checkAttack = () => {
+    return game.player.playerBoard.board.some((row) => {
+      return row.some((cell) => cell.hit || cell.miss);
+    });
+  };
+
+  expect(checkAttack()).toBe(true);
+});

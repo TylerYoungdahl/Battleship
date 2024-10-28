@@ -8,11 +8,8 @@ const compBoard = document.querySelector("#board-computer");
 const randBtn = document.querySelector("#random");
 const startBtn = document.querySelector("#start");
 
-const testPlayer = document.querySelector("#test-player");
-const testComp = document.querySelector("#test-comp");
-
 const screen = dom();
-const game = new GameController();
+const game = new GameController(refreshBoards);
 
 function refreshBoards() {
   screen.displayBoard(playerBoard, game.player, game.player.playerBoard, game);
@@ -40,9 +37,26 @@ document.addEventListener("DOMContentLoaded", () => {
   refreshBoards();
 });
 
+// TESTING
+
+const testPlayer = document.querySelector("#test-player");
+const testComp = document.querySelector("#test-comp");
+const testAttack = document.querySelector("#player-attack");
+
 testPlayer.addEventListener("click", () => {
-  console.log(game.player.playerBoard.board);
+  console.log(JSON.stringify(game.player.playerBoard.board));
 });
 testComp.addEventListener("click", () => {
   console.log(JSON.stringify(game.computer.playerBoard.board));
 });
+testAttack.addEventListener("click", () => {
+  if (checkAttack()) {
+    console.log("comp made an attack");
+  }
+});
+
+const checkAttack = () => {
+  return game.player.playerBoard.board.some((row) => {
+    return row.some((cell) => cell.hit || cell.miss);
+  });
+};

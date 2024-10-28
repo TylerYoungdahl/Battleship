@@ -1,10 +1,11 @@
 import Player from "./player";
 
 export default class GameController {
-  constructor() {
+  constructor(refreshBoards) {
     this.player = new Player("player");
     this.computer = new Player("computer");
     this.winner = null;
+    this.refreshBoards = refreshBoards;
 
     this.player.playerBoard.generateBoard();
     this.computer.playerBoard.generateBoard();
@@ -27,8 +28,11 @@ export default class GameController {
       return;
     } else if (!coordinate.hit && !coordinate.miss) {
       this.player.playerBoard.receiveAttack(x, y);
+      console.log("Computer has made an attack"); // test
 
       this.checkWinner(this.computer, this.player);
+
+      this.refreshBoards();
     } else {
       this.compTurn();
     }
