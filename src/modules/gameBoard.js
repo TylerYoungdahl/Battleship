@@ -65,7 +65,6 @@ export default class GameBoard {
         let canPlace = true;
 
         if (shipDirection === "horizontal") {
-          // Ensure the ship fits horizontally and doesn't overlap
           if (startX + ship.length <= 10) {
             for (let i = 0; i < ship.length; i++) {
               if (!this.board[startY][startX + i].empty) {
@@ -79,7 +78,6 @@ export default class GameBoard {
         }
 
         if (shipDirection === "vertical") {
-          // Ensure the ship fits vertically and doesn't overlap
           if (startY + ship.length <= 10) {
             for (let i = 0; i < ship.length; i++) {
               if (!this.board[startY + i][startX].empty) {
@@ -92,17 +90,16 @@ export default class GameBoard {
           }
         }
 
-        // Place the ship if it can be placed without overlap
         if (canPlace) {
           if (shipDirection === "horizontal") {
             for (let i = 0; i < ship.length; i++) {
               this.board[startY][startX + i].shipType = ship.type;
-              this.board[startY][startX + i].empty = false; // Mark space as occupied
+              this.board[startY][startX + i].empty = false;
             }
           } else if (shipDirection === "vertical") {
             for (let i = 0; i < ship.length; i++) {
               this.board[startY + i][startX].shipType = ship.type;
-              this.board[startY + i][startX].empty = false; // Mark space as occupied
+              this.board[startY + i][startX].empty = false;
             }
           }
           placed = true;

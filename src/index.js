@@ -43,25 +43,3 @@ document.addEventListener("DOMContentLoaded", () => {
   game.computer.playerBoard.generateBoard();
   refreshBoards();
 });
-
-// TESTING
-
-const testPlayer = document.querySelector("#test-player");
-const testComp = document.querySelector("#test-comp");
-const testAttack = document.querySelector("#player-attack");
-
-testPlayer.addEventListener("click", () => {
-  console.log(JSON.stringify(game.player.playerBoard.board));
-});
-testComp.addEventListener("click", () => {
-  console.log(JSON.stringify(game.computer.playerBoard.board));
-});
-testAttack.addEventListener("click", () => {
-  console.log(game.winner);
-});
-
-const checkAttack = () => {
-  return game.player.playerBoard.board.some((row) => {
-    return row.some((cell) => cell.hit || cell.miss);
-  });
-};

@@ -30,7 +30,6 @@ export default class GameController {
       return;
     } else if (!coordinate.hit && !coordinate.miss) {
       this.player.playerBoard.receiveAttack(x, y);
-      console.log("Computer has made an attack"); // test
 
       this.checkWinner(this.computer, this.player);
 
@@ -43,11 +42,6 @@ export default class GameController {
   checkWinner(player, opponent) {
     if (opponent.playerBoard.checkAllShipsSunk()) {
       this.winner = player.playerType;
-      console.log(this.winner); // test
-    }
-    // test
-    else {
-      console.log("no winner");
     }
   }
 }

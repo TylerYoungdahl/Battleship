@@ -44,8 +44,12 @@ export default function dom() {
 
   function checkWinnerDOM(game, boardContainer) {
     if (game.winner) {
-      boardContainer.innerHTML = "";
-      console.log("GAME OVER");
+      boardContainer.innerHTML = `<div id="game-over-screen">
+          <h1 id="game-over-text">${
+            game.winner === "player" ? "Player" : "Computer"
+          } Wins!</h1>
+          <button id="restart-btn">Play Again?</button>
+        </div>`;
     }
   }
 
