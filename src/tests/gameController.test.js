@@ -1,7 +1,11 @@
 import GameController from "../modules/gameController";
 
+const refreshBoards = () => {
+  return true;
+};
+
 test("Player receives attack from computer", () => {
-  const game = new GameController();
+  const game = new GameController(refreshBoards);
 
   game.compTurn();
 
@@ -15,7 +19,7 @@ test("Player receives attack from computer", () => {
 });
 
 test("Player's gameboard receives attack in new game", () => {
-  const game = new GameController();
+  const game = new GameController(refreshBoards);
 
   game.computer.playerBoard.receiveAttack(0, 0);
 
@@ -23,7 +27,7 @@ test("Player's gameboard receives attack in new game", () => {
 });
 
 test("Computer attacks after player", () => {
-  const game = new GameController();
+  const game = new GameController(refreshBoards);
 
   game.playerTurn(0, 0);
   const checkAttack = () => {
@@ -33,4 +37,18 @@ test("Computer attacks after player", () => {
   };
 
   expect(checkAttack()).toBe(true);
+});
+
+test("Sinking all ships results in a winner", () => {
+  const game = new GameController(refreshBoards);
+
+  game.computer.playerBoard.ships.forEach((ship) => {
+    for (let i = 0; i < ship.length; i++) {
+      ship.hit();
+    }
+  });
+
+  game.checkWinner(game.player, game.computer);
+
+  expect(game.winner).toBe("player");
 });

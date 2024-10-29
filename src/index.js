@@ -3,6 +3,7 @@ import GameBoard from "./modules/gameBoard";
 import "./assets/styles/styles.css";
 import GameController from "./modules/gameController";
 
+const boardContainer = document.querySelector("#board-container");
 const playerBoard = document.querySelector("#board-player");
 const compBoard = document.querySelector("#board-computer");
 const randBtn = document.querySelector("#random");
@@ -19,6 +20,12 @@ function refreshBoards() {
     game.computer.playerBoard,
     game
   );
+
+  if (game.winner) {
+    console.log("winner");
+  }
+
+  screen.checkWinnerDOM(game, boardContainer);
 }
 
 randBtn.addEventListener("click", () => {
@@ -50,9 +57,7 @@ testComp.addEventListener("click", () => {
   console.log(JSON.stringify(game.computer.playerBoard.board));
 });
 testAttack.addEventListener("click", () => {
-  if (checkAttack()) {
-    console.log("comp made an attack");
-  }
+  console.log(game.winner);
 });
 
 const checkAttack = () => {

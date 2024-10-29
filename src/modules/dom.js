@@ -8,7 +8,7 @@ export default function dom() {
 
         cell.classList.add("cell");
         if (gameBoard.board[x][y].shipType && !gameBoard.board[x][y].hit) {
-          cell.classList.add("ship");
+          cell.classList.add(`ship-${gameBoard.board[x][y].shipType}`);
         } else if (gameBoard.board[x][y].hit) {
           cell.classList.add("hit");
         } else if (gameBoard.board[x][y].miss) {
@@ -24,7 +24,7 @@ export default function dom() {
             const x = e.target.dataset.x;
             const y = e.target.dataset.y;
             game.playerTurn(x, y);
-            displayBoard(domBoard, player, gameBoard, game);
+            game.refreshBoards();
           });
         }
 
@@ -42,5 +42,12 @@ export default function dom() {
     randBtn.style.pointerEvents = "none";
   }
 
-  return { displayBoard, startGameDOM };
+  function checkWinnerDOM(game, boardContainer) {
+    if (game.winner) {
+      boardContainer.innerHTML = "";
+      console.log("GAME OVER");
+    }
+  }
+
+  return { displayBoard, startGameDOM, checkWinnerDOM };
 }

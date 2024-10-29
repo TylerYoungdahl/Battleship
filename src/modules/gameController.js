@@ -25,6 +25,8 @@ export default class GameController {
     const coordinate = this.player.playerBoard.board[x][y];
 
     if (this.winner) {
+      this.refreshBoards();
+
       return;
     } else if (!coordinate.hit && !coordinate.miss) {
       this.player.playerBoard.receiveAttack(x, y);
@@ -41,6 +43,11 @@ export default class GameController {
   checkWinner(player, opponent) {
     if (opponent.playerBoard.checkAllShipsSunk()) {
       this.winner = player.playerType;
+      console.log(this.winner); // test
+    }
+    // test
+    else {
+      console.log("no winner");
     }
   }
 }
