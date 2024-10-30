@@ -44,4 +44,12 @@ export default class GameController {
       this.winner = player.playerType;
     }
   }
+
+  resetGame() {
+    this.player = new Player("player");
+    this.computer = new Player("computer");
+    this.winner = null;
+    this.player.playerBoard.generateBoard();
+    this.computer.playerBoard.generateBoard();
+  }
 }

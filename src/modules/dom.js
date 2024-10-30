@@ -7,7 +7,11 @@ export default function dom() {
         const cell = document.createElement("div");
 
         cell.classList.add("cell");
-        if (gameBoard.board[x][y].shipType && !gameBoard.board[x][y].hit) {
+        if (
+          gameBoard.board[x][y].shipType &&
+          !gameBoard.board[x][y].hit &&
+          player.playerType === "player"
+        ) {
           cell.classList.add(`ship-${gameBoard.board[x][y].shipType}`);
         } else if (gameBoard.board[x][y].hit) {
           cell.classList.add("hit");
@@ -48,10 +52,15 @@ export default function dom() {
           <h1 id="game-over-text">${
             game.winner === "player" ? "Player" : "Computer"
           } Wins!</h1>
-          <button id="restart-btn">Play Again?</button>
+          <button id="reset-btn">Play Again?</button>
         </div>`;
     }
   }
 
-  return { displayBoard, startGameDOM, checkWinnerDOM };
+  function resetGameDOM(boardContainer) {
+    boardContainer.innerHTML = `<div id="board-player"></div>
+        <div id="board-computer"></div>`;
+  }
+
+  return { displayBoard, startGameDOM, checkWinnerDOM, resetGameDOM };
 }

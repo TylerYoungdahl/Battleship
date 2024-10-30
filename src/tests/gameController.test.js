@@ -52,3 +52,12 @@ test("Sinking all ships results in a winner", () => {
 
   expect(game.winner).toBe("player");
 });
+
+test("reset game method resets all values", () => {
+  const game = new GameController(refreshBoards);
+
+  game.player.playerBoard.ships[0].sunk = true;
+  game.resetGame();
+
+  expect(game.player.playerBoard.ships[0].sunk).toBe(false);
+});

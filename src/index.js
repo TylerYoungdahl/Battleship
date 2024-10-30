@@ -4,8 +4,8 @@ import "./assets/styles/styles.css";
 import GameController from "./modules/gameController";
 
 const boardContainer = document.querySelector("#board-container");
-const playerBoard = document.querySelector("#board-player");
-const compBoard = document.querySelector("#board-computer");
+let playerBoard = document.querySelector("#board-player");
+let compBoard = document.querySelector("#board-computer");
 const randBtn = document.querySelector("#random");
 const startBtn = document.querySelector("#start");
 
@@ -36,6 +36,17 @@ randBtn.addEventListener("click", () => {
 
 startBtn.addEventListener("click", () => {
   screen.startGameDOM(compBoard, randBtn);
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.id === "reset-btn") {
+    game.resetGame();
+    screen.resetGameDOM(boardContainer);
+    playerBoard = document.querySelector("#board-player");
+    compBoard = document.querySelector("#board-computer");
+    randBtn.style.pointerEvents = "auto";
+    refreshBoards();
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
